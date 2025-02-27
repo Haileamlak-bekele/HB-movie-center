@@ -1,0 +1,255 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #17153B;
+}
+/* Navbar Styling */
+nav {
+  background-color: #433D8B;
+  color: antiquewhite;
+  padding: 10px 20px;
+}
+
+/* Navigation List (Flexbox Layout) */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left Section: Logo & Title */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-left img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.nav-left h5 {
+  font-size: 20px;
+  margin: 0;
+}
+
+/* Right Section: Search, Button & Links */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 150px;
+  transition: width 0.3s ease;
+}
+
+.search-container input:focus {
+  width: 200px;
+}
+
+/* Search Button with Image */
+.search-container button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.search-container button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Navbar Links */
+.nav-right a {
+  text-decoration: none;
+  color: antiquewhite;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-left {
+    margin-bottom: 10px;
+  }
+
+  .nav-right {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-container input {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+/* Main container to stack sections */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Adds space between sections */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.banner-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #17153B;
+  padding: 40px 0;
+  margin-top: 60px;
+}
+.banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cylinder-container {
+  position: relative;
+  top: 0;
+  width: 300px;
+  height: 400px;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 1s ease-in-out;
+}
+
+.poster {
+  position: absolute;
+  width: 240px;
+  height: 300px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+  transform-origin: center;
+}
+
+.controls {
+  position: absolute;
+  bottom: -5px;
+  display: flex;
+  gap: 20px;
+}
+
+.controls button {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.controls button:hover {
+  background-color: white;
+}
+
+/* Trending Movies Section */
+.trending-section {
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  background: #17153B;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+.trending-section h2 {
+  font-size: 28px;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+/* Trending Movie Slider */
+.trending-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  overflow: hidden;
+  width: 80%;
+  scroll-behavior: smooth;
+}
+
+.tranding-movie-card {
+  flex: 0 0 auto;
+  width: 150px;
+  margin: 0 10px;
+  background: #2a2a2a;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.tranding-movie-card img {
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+  border: 2px solid #ff9800;
+}
+
+/* Hover Effect */
+.tranding-movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Slider Buttons */
+#prevBtn, #nextBtn {
+  background-color: #ffcc00;
+  border: none;
+  color: black;
+  font-size: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+  position: absolute;
+}
+
+#prevBtn { left: 5px; }
+#nextBtn { right: 5px; }
+
+#prevBtn:hover, #nextBtn:hover {
+  background-color: #ff9800;
+}

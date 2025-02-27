@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta view=""/>
+    <title>movie app</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="search.css"/>
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <!-- Left Section: Logo & Title -->
+        <div class="nav-left">
+          <li><img src="../images/kisspng-hanna-barbera-cartoon-network-television-logo-wall-logo-5ae1de03c6a326.5791881315247518758136.png" alt="Logo"></li>
+          <li><h5>Movie Center</h5></li>
+        </div>
+
+        <!-- Right Section: Search, Button & Links -->
+        <div class="nav-right">
+          <li>
+            <div class="search-container">
+              <input type="text" id="searchInput" placeholder="Search your movie"/>
+              <button id="searchButton"><img src="./images/97312c0895bf0d4222e3d9f1acded5dc.png" alt="Search"></button>
+            </div>
+          </li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </div>
+      </ul>
+    </nav>
+    <div class="main-container">
+    <section class="banner-section">
+      <div class="banner-container">
+        <div class="cylinder-container" id="cylinder">
+          <div class="poster" style="background-image: url('./images/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg');"></div>
+          <div class="poster" style="background-image: url('./images/MV5BNjRhNGZjZjEtYTQzYS00OWUxLThjNGEtMTIwMTE2ZDFlZTZkXkEyXkFqcGc@._V1_.jpg');"></div>
+          <div class="poster" style="background-image: url('./images/MV5BNzUyM2YyY2MtNzNlMS00MWU5LTgxNjAtNzZlNmI2NjU2NDZlXkEyXkFqcGc@._V1_.jpg');"></div>
+          <div class="poster" style="background-image: url('./images/MV5BODY2MTAzOTQ4M15BMl5BanBnXkFtZTgwNzg5MTE0MjI@._V1_.jpg');"></div>
+          <div class="poster" style="background-image: url('./images/MV5BNjg4ZTQ1MjctNzEyMS00YWM2LTk1ZTQtNDU3ZDJjNjhhMDhkXkEyXkFqcGc@._V1_.jpg');"></div>
+      </div>
+  
+      <div class="controls">
+          <button onclick="rotateCylinder(-1)">&#10094;</button>
+          <button onclick="rotateCylinder(1)">&#10095;</button>
+      </div>
+  
+
+      </div>
+    </section>
+
+    <section class="trending-section">
+      <h2>Trending Movies</h2>
+      <div class="trending-container">
+        <button id="prevBtn">&#10094;</button>
+        <div class="slider">
+          <div class="tranding-movie-card">
+            <img src="./images/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg" alt="Movie 1">
+            <h3>Movie Title 1</h3>
+          </div>
+          <div class="tranding-movie-card">
+            <img src="./images/MV5BNjRhNGZjZjEtYTQzYS00OWUxLThjNGEtMTIwMTE2ZDFlZTZkXkEyXkFqcGc@._V1_.jpg" alt="Movie 2">
+            <h3>Movie Title 2</h3>
+          </div>
+          <div class="tranding-movie-card">
+            <img src="./images/MV5BNzUyM2YyY2MtNzNlMS00MWU5LTgxNjAtNzZlNmI2NjU2NDZlXkEyXkFqcGc@._V1_.jpg" alt="Movie 3">
+            <h3>Movie Title 3</h3>
+          </div>
+          <div class="tranding-movie-card">
+            <img src="./images/MV5BODY2MTAzOTQ4M15BMl5BanBnXkFtZTgwNzg5MTE0MjI@._V1_.jpg" alt="Movie 4">
+            <h3>Movie Title 4</h3>
+          </div>
+          <div class="tranding-movie-card">
+            <img src="./images/MV5BNjg4ZTQ1MjctNzEyMS00YWM2LTk1ZTQtNDU3ZDJjNjhhMDhkXkEyXkFqcGc@._V1_.jpg" alt="Movie 5">
+            <h3>Movie Title 5</h3>
+          </div>
+        </div>
+        <button id="nextBtn">&#10095;</button>
+      </div>
+    </section>
+    
+    
+  </div>
+
+
+
+
+    <script src="./bannner.js"></script>
+    <!-- <script src="./search.js"></script> -->
+  </body>
+
+</html>
