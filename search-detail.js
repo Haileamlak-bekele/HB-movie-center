@@ -1,11 +1,3 @@
-const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer  eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzVjNzg3YzdlYzEyMzE5YTc0ZDY2ZGZkNmM1YjI1ZSIsIm5iZiI6MTc0MDc0NTcwMC42OTcsInN1YiI6IjY3YzFhYmU0YTZlNTUxMTE5YTM1YzQzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JiPSvWRabSycHL3eznxz8C4o8Plxi5ivZF0Y-Wj3E24'
-    }
-  };
-
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const imdbId = params.get("id");
@@ -15,8 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-   
-
     try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${imdbId}?language=en-US`, options);
 
@@ -25,8 +15,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const movie = await response.json();
-
-        // Handle missing data gracefully
         const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "placeholder.jpg";
         const genres = movie.genres?.map(g => g.name).join(", ") || "N/A";
         const productionCompanies = movie.production_companies?.map(pc => pc.name).join(", ") || "N/A";
@@ -70,7 +58,7 @@ async function fetchRecommendations(imdbId) {
             return;
         }
 
-        let visibleCount = 10; // Show first 6 recommendations
+        let visibleCount = 6; // Show first 6 recommendations
         let recommendationsHtml = "<h2>Recommended Movies</h2><div id='recommendationsGrid' class='recommendations-grid'>";
 
         recommendations.slice(0, visibleCount).forEach(movie => {
@@ -80,7 +68,7 @@ async function fetchRecommendations(imdbId) {
                     <img src="${posterUrl}" alt="${movie.title}">
                     <h4>${movie.title}</h4>
                     <p>⭐ ${movie.vote_average}</p>
-                    <a href="movie-detail.html?id=${movie.id}">View Details</a>
+                    <button class="view-details" data-id="${movie.id}">View Details</button>
                 </div>
             `;
         });
@@ -88,10 +76,18 @@ async function fetchRecommendations(imdbId) {
         recommendationsHtml += "</div>";
 
         if (recommendations.length > visibleCount) {
-            recommendationsHtml += `<button id="showMoreBtn">Show More recomendation</button>`;
+            recommendationsHtml += `<button id="showMoreBtn">Show More</button>`;
         }
 
         document.getElementById("recommendations").innerHTML = recommendationsHtml;
+
+        // Attach event listeners to "View Details" buttons
+        document.querySelectorAll(".view-details").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const movieId = event.target.getAttribute("data-id");
+                window.location.href = `search-detail.html?id=${movieId}`;
+            });
+        });
 
         // Handle "Show More" button click
         document.getElementById("showMoreBtn")?.addEventListener("click", () => {
@@ -103,13 +99,21 @@ async function fetchRecommendations(imdbId) {
                         <img src="${posterUrl}" alt="${movie.title}">
                         <h4>${movie.title}</h4>
                         <p>⭐ ${movie.vote_average}</p>
-                        <a href="search-details.html?id=${movie.id}">View Details</a>
+                        <button class="view-details" data-id="${movie.id}">View Details</button>
                     </div>
                 `;
             }).join("");
 
             recommendationsGrid.innerHTML += additionalMovies;
             document.getElementById("showMoreBtn").remove(); // Remove the button after all are loaded
+
+            // Reattach event listeners for new "View Details" buttons
+            document.querySelectorAll(".view-details").forEach(button => {
+                button.addEventListener("click", (event) => {
+                    const movieId = event.target.getAttribute("data-id");
+                    window.location.href = `search-details.html?id=${movieId}`;
+                });
+            });
         });
 
     } catch (error) {
