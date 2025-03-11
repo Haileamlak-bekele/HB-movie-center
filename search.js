@@ -8,10 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchMovies(query) {
-  fetch(`https://imdb.iamidiotareyoutoo.com/search?q=${query}`) // Replace with actual API URL
-      .then(response => response.json())
-      .then(data => displayResults(data.description))
-      .catch(error => console.error("Error fetching movies:", error));
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer  eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzVjNzg3YzdlYzEyMzE5YTc0ZDY2ZGZkNmM1YjI1ZSIsIm5iZiI6MTc0MDc0NTcwMC42OTcsInN1YiI6IjY3YzFhYmU0YTZlNTUxMTE5YTM1YzQzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JiPSvWRabSycHL3eznxz8C4o8Plxi5ivZF0Y-Wj3E24'
+        }
+      };
+      
+      fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`, options)
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
 }
 
 function displayResults(movies) {
