@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             <p><strong>Release Date:</strong> ${releaseDate}</p>
             <p><strong>IMDB Link:</strong> <a href="${imdbUrl}" target="_blank">View on IMDb</a></p>
         `;
+
+        fetchRecommendations(imdbId);
     } catch (error) {
         console.error("Error fetching movie details:", error);
         document.getElementById("movieDetail").innerHTML = "<p>Error fetching movie details</p>";
