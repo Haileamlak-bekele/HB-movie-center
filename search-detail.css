@@ -108,3 +108,50 @@ body {
       padding: 15px;
   }
 }
+
+
+.recommendations-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.recommendations-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.recommendation-card {
+  width: 200px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-radius: 5px;
+}
+
+.recommendation-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.recommendation-card h4 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.recommendation-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+.recommendation-card a {
+  display: inline-block;
+  margin-top: 5px;
+  text-decoration: none;
+  background: #007BFF;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
