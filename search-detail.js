@@ -7,13 +7,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer  eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzVjNzg3YzdlYzEyMzE5YTc0ZDY2ZGZkNmM1YjI1ZSIsIm5iZiI6MTc0MDc0NTcwMC42OTcsInN1YiI6IjY3YzFhYmU0YTZlNTUxMTE5YTM1YzQzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JiPSvWRabSycHL3eznxz8C4o8Plxi5ivZF0Y-Wj3E24'
+        }
+      };
+
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${imdbId}?language=en-US`, {
-            headers: {
-                accept: "application/json",
-                Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzVjNzg3YzdlYzEyMzE5YTc0ZDY2ZGZkNmM1YjI1ZSIsIm5iZiI6MTc0MDc0NTcwMC42OTcsInN1YiI6IjY3YzFhYmU0YTZlNTUxMTE5YTM1YzQzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JiPSvWRabSycHL3eznxz8C4o8Plxi5ivZF0Y-Wj3E24"
-            }
-        });
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${imdbId}?language=en-US`, options);
 
         if (!response.ok) {
             throw new Error("Failed to fetch movie details.");
@@ -48,3 +51,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("movieDetail").innerHTML = "<p>Error fetching movie details</p>";
     }
 });
+
+async function fetchRecommendations(imdbId) {
+    try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${imdbId}/recommendations?language=en-US&page=1`, options);
+
+        if (!response.ok) throw new Error("Failed to fetch recommendations.");
+
+        const data = await response.json();
+        const recommendations = data.results;
+
+        if (recommendations.length === 0) {
+            document.getElementById("recommendations").innerHTML = "<p>No recommendations available.</p>";
+            return;
+        }
+
+        let recommendationsHtml = "<h2>Recommended Movies</h2><div class='recommendations-grid'>";
+
+        recommendations.forEach(movie => {
+            const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : "placeholder.jpg";
+            recommendationsHtml += `
+                <div class="recommendation-card">
+                    <img src="${posterUrl}" alt="${movie.title}">
+                    <h4>${movie.title}</h4>
+                    <p>⭐ ${movie.vote_average}</p>
+                    <a href="movie-detail.html?id=${movie.id}">View Details</a>
+                </div>
+            `;
+        });
+
+        recommendationsHtml += "</div>";
+        document.getElementById("recommendations").innerHTML = recommendationsHtml;
+    } catch (error) {
+        console.error("Error fetching recommendations:", error);
+        document.getElementById("recommendations").innerHTML = "<p>Error fetching recommendations</p>";
+    }
+}
