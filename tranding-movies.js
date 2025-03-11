@@ -47,30 +47,38 @@ fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
   })
   .catch(error => console.error('Error fetching movies:', error));
 
-// Scroll functionality for next and previous buttons
-nextBtn.addEventListener('click', () => {
-    slider.scrollBy({ left: 220, behavior: 'smooth' });
-    // resetAutoScroll();
-});
-
-prevBtn.addEventListener('click', () => {
-    slider.scrollBy({ left: -220, behavior: 'smooth' });
-    // resetAutoScroll();
-});
+let autoScroll;
+let scrollAmount = 220; // Amount to scroll each time
 
 // Function to automatically scroll the slider
-let autoScroll;
 function startAutoScroll() {
+    stopAutoScroll(); // Ensure no duplicate intervals
     autoScroll = setInterval(() => {
-        slider.scrollBy({ left: 220, behavior: 'smooth' });
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }, 3000); // Scroll every 3 seconds
 }
 
-// Function to reset auto-scroll after manual navigation
-function resetAutoScroll() {
+// Function to stop auto-scrolling
+function stopAutoScroll() {
     clearInterval(autoScroll);
+}
+
+// Function to restart auto-scroll without resetting position
+function resetAutoScroll() {
+    stopAutoScroll();
     startAutoScroll();
 }
+
+// Scroll functionality for next and previous buttons
+nextBtn.addEventListener('click', () => {
+    slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    resetAutoScroll();
+});
+
+prevBtn.addEventListener('click', () => {
+    slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    resetAutoScroll();
+});
 
 // Start auto-scrolling when the page loads
 startAutoScroll();
