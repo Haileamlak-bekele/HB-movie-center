@@ -70,7 +70,7 @@ async function fetchRecommendations(imdbId) {
             return;
         }
 
-        let visibleCount = 6; // Show first 6 recommendations
+        let visibleCount = 10; // Show first 6 recommendations
         let recommendationsHtml = "<h2>Recommended Movies</h2><div id='recommendationsGrid' class='recommendations-grid'>";
 
         recommendations.slice(0, visibleCount).forEach(movie => {
@@ -88,7 +88,7 @@ async function fetchRecommendations(imdbId) {
         recommendationsHtml += "</div>";
 
         if (recommendations.length > visibleCount) {
-            recommendationsHtml += `<button id="showMoreBtn">Show More</button>`;
+            recommendationsHtml += `<button id="showMoreBtn">Show More recomendation</button>`;
         }
 
         document.getElementById("recommendations").innerHTML = recommendationsHtml;
@@ -103,7 +103,7 @@ async function fetchRecommendations(imdbId) {
                         <img src="${posterUrl}" alt="${movie.title}">
                         <h4>${movie.title}</h4>
                         <p>⭐ ${movie.vote_average}</p>
-                        <a href="movie-detail.html?id=${movie.id}">View Details</a>
+                        <a href="search-details.html?id=${movie.id}">View Details</a>
                     </div>
                 `;
             }).join("");
