@@ -80,7 +80,7 @@ async function fetchRecommendations(imdbId) {
                     <img src="${posterUrl}" alt="${movie.title}">
                     <h4>${movie.title}</h4>
                     <p>⭐ ${movie.vote_average}</p>
-                    <a href="search-details.html.html?id=${movie.id}">View Details</a>
+                    <a href="search-details.html?id=${movie.id}">View Details</a>
                 </div>
             `;
         });
