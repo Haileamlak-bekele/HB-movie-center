@@ -64,7 +64,7 @@ const posters = document.querySelectorAll(".poster");
             if (e.key === "Enter") {
                 document.getElementById("searchButton").click();
             }
-        }
+        });
         
 
         document.addEventListener("DOMContentLoaded", function() {
