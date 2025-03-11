@@ -54,16 +54,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
- function fetchRecommendations(imdbId) {
+async function fetchRecommendations(imdbId) {
     try {
-        const response =  fetch(`https://api.themoviedb.org/3/movie/${imdbId}/recommendations?language=en-US&page=1`, options);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${imdbId}/recommendations?language=en-US&page=1`, options);
 
         if (!response.ok) throw new Error("Failed to fetch recommendations.");
 
-        const data =  response.json();
+        const data = await response.json();
         const recommendations = data.results;
 
-        if (recommendations.length === 0) {
+        if (!recommendations || recommendations.length === 0) {
             document.getElementById("recommendations").innerHTML = "<p>No recommendations available.</p>";
             return;
         }
