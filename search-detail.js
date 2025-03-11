@@ -70,9 +70,10 @@ async function fetchRecommendations(imdbId) {
             return;
         }
 
-        let recommendationsHtml = "<h2>Recommended Movies</h2><div class='recommendations-grid'>";
+        let visibleCount = 6; // Show first 6 recommendations
+        let recommendationsHtml = "<h2>Recommended Movies</h2><div id='recommendationsGrid' class='recommendations-grid'>";
 
-        recommendations.forEach(movie => {
+        recommendations.slice(0, visibleCount).forEach(movie => {
             const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : "placeholder.jpg";
             recommendationsHtml += `
                 <div class="recommendation-card">
@@ -85,7 +86,32 @@ async function fetchRecommendations(imdbId) {
         });
 
         recommendationsHtml += "</div>";
+
+        if (recommendations.length > visibleCount) {
+            recommendationsHtml += `<button id="showMoreBtn">Show More</button>`;
+        }
+
         document.getElementById("recommendations").innerHTML = recommendationsHtml;
+
+        // Handle "Show More" button click
+        document.getElementById("showMoreBtn")?.addEventListener("click", () => {
+            let recommendationsGrid = document.getElementById("recommendationsGrid");
+            let additionalMovies = recommendations.slice(visibleCount).map(movie => {
+                const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : "placeholder.jpg";
+                return `
+                    <div class="recommendation-card">
+                        <img src="${posterUrl}" alt="${movie.title}">
+                        <h4>${movie.title}</h4>
+                        <p>⭐ ${movie.vote_average}</p>
+                        <a href="movie-detail.html?id=${movie.id}">View Details</a>
+                    </div>
+                `;
+            }).join("");
+
+            recommendationsGrid.innerHTML += additionalMovies;
+            document.getElementById("showMoreBtn").remove(); // Remove the button after all are loaded
+        });
+
     } catch (error) {
         console.error("Error fetching recommendations:", error);
         document.getElementById("recommendations").innerHTML = "<p>Error fetching recommendations</p>";
