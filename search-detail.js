@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
-  const imdbId = params.get("imdb_id");
+  const imdbId = params.get("id");
 
   if (!imdbId) {
       document.getElementById("movieDetail").innerHTML = "<p>Movie not found</p>";
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-      const response = await fetch(`https://imdb.iamidiotareyoutoo.com/search?tt=${imdbId}`);
+      const response = await fetch(`'https://api.themoviedb.org/3/movie/${imdbId}?language=en-US`);
       const data = await response.json();
 
       if (!data.ok) {
