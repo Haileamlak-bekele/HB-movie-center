@@ -34,16 +34,43 @@ fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
         <h3>${title}</h3>
       `;
 
+      // Add click event to navigate to search-details.html with movie ID
+      movieCard.addEventListener('click', () => {
+        window.location.href = `search-details.html?id=${movie.id}`;
+      });
+
       slider.appendChild(movieCard);
     });
+
+    // Start auto-scrolling after content loads
+    startAutoScroll();
   })
   .catch(error => console.error('Error fetching movies:', error));
 
 // Scroll functionality for next and previous buttons
 nextBtn.addEventListener('click', () => {
     slider.scrollBy({ left: 220, behavior: 'smooth' });
+    // resetAutoScroll();
 });
 
 prevBtn.addEventListener('click', () => {
     slider.scrollBy({ left: -220, behavior: 'smooth' });
+    // resetAutoScroll();
 });
+
+// Function to automatically scroll the slider
+let autoScroll;
+function startAutoScroll() {
+    autoScroll = setInterval(() => {
+        slider.scrollBy({ left: 220, behavior: 'smooth' });
+    }, 3000); // Scroll every 3 seconds
+}
+
+// Function to reset auto-scroll after manual navigation
+function resetAutoScroll() {
+    clearInterval(autoScroll);
+    startAutoScroll();
+}
+
+// Start auto-scrolling when the page loads
+startAutoScroll();
