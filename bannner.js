@@ -59,6 +59,12 @@ const posters = document.querySelectorAll(".poster");
                 window.location.href = `search-result.html?search=${encodeURIComponent(query)}`;
             }
         });
+
+        document.getElementById("searchInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                document.getElementById("searchButton").click();
+            }
+        }
         
 
         document.addEventListener("DOMContentLoaded", function() {
