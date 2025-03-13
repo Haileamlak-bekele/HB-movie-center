@@ -38,16 +38,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         const imdbUrl = movie.imdb_id ? `https://www.imdb.com/title/${movie.imdb_id}` : "#";
 
         document.getElementById("movieDetail").innerHTML = `
-            <h1>${movie.title}</h1>
-            <img src="${posterUrl}" alt="${movie.title}" class="movie-poster">
-            <p><strong>Description:</strong> ${overview}</p>
-            <p><strong>Genre:</strong> ${genres}</p>
-            <p><strong>Rating:</strong> ${voteAverage} (${voteCount} votes)</p>
-            <p><strong>Production Companies:</strong> ${productionCompanies}</p>
-            <p><strong>Country:</strong> ${country}</p>
-            <p><strong>Release Date:</strong> ${releaseDate}</p>
-            <p><strong>IMDB Link:</strong> <a href="${imdbUrl}" target="_blank">View on IMDb</a></p>
-        `;
+        <div class="movie-detail-container">
+            <div class="movie-poster-container">
+                <img src="${posterUrl}" alt="${movie.title}" class="movie-poster">
+                <div class="movie-info-overlay">
+                    <h1>${movie.title}</h1>
+                    <p><strong>Description:</strong> ${overview}</p>
+                    <p><strong>Genre:</strong> ${genres}</p>
+                    <p><strong>Rating:</strong> ${voteAverage} (${voteCount} votes)</p>
+                    <p><strong>Production Companies:</strong> ${productionCompanies}</p>
+                    <p><strong>Country:</strong> ${country}</p>
+                    <p><strong>Release Date:</strong> ${releaseDate}</p>
+                    <p><strong>IMDB Link:</strong> <a href="${imdbUrl}" target="_blank">View on IMDb</a></p>
+                </div>
+            </div>
+        </div>
+    `;
+    
 
         fetchRecommendations(imdbId);
     } catch (error) {

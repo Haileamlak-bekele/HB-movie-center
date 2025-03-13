@@ -180,7 +180,7 @@ ul {
 /* Trending Movies Section */
 .trending-section {
   width: 100%;
-  max-width: 1000px;
+  max-width: 99%;
   padding: 20px;
   background: #17153B;
   border-radius: 10px;
@@ -188,6 +188,7 @@ ul {
   text-align: center;
 }
 .trending-section h2 {
+  display: flex;
   font-size: 28px;
   color: #ffcc00;
   margin-bottom: 20px;
@@ -204,7 +205,7 @@ ul {
 .slider {
   display: flex;
   overflow: hidden;
-  width: 80%;
+  width: 100%;
   scroll-behavior: smooth;
 }
 

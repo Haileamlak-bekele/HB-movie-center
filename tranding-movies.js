@@ -82,3 +82,16 @@ prevBtn.addEventListener('click', () => {
 
 // Start auto-scrolling when the page loads
 startAutoScroll();
+
+// Scroll horizontally when mouse scrolls down
+slider.addEventListener('wheel', (event) => {
+  event.preventDefault(); // Prevent vertical scrolling
+
+  let scrollSpeed = 24.5; // Increase this multiplier for faster scrolling
+  let scrollAmount = event.deltaY * scrollSpeed;
+
+  slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  resetAutoScroll(); // Restart auto-scroll after manual scroll
+});
+
+
